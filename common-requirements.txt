@@ -1,0 +1,4 @@
+virtualenv==12.0.7
+virtualenvwrapper==4.3.2
+autoenv==1.0.0
+ipython==3.0.0
