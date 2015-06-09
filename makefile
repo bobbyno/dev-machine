@@ -1,16 +1,41 @@
-emacs_build = Emacs-2015-04-05_01-41-26-16eec6f-universal.dmg
+dev = ~/dev
+emacsd = ~/dev/emacs.d
+oldemacs = /tmp/emacs
 
 help:
 	@echo make bootstrap
 
-emacs:
-	wget -P $$TMPDIR http://emacsformacosx.com/emacs-builds/$(emacs_build)
-	hdiutil mount $$TMPDIR/$(emacs_build)
-	cp -r /Volumes/Emacs/Emacs.app /Applications
+.SILENT: check-user
+check-user:
+	if [ -z $(GITHUB_USER) ]; then echo "You need to export GITHUB_USER"; fi
+	[ ! -z $(GITHUB_USER) ]
 
-dotfiles:
-	if [ ! -d ~/dev ]; then mkdir ~/dev; fi
-	cd ~/dev && git clone git@github.com:saslani/dotfiles.git
+$(oldemacs):
+	if [ ! -d $(oldemacs) ]; then mkdir $(oldemacs); fi
+
+clean-old-emacs: $(oldemacs)
+	sudo mv /usr/bin/emacs $(oldemacs)
+	sudo mv /usr/share/emacs $(oldemacs)/share-emacs
+	sudo mv /usr/bin/emacs-undumped $(oldemacs)
+	if [ -d /Applications/Emacs.app ]; then mv /Applications/Emacs.app $(oldemacs); fi
+
+emacs: clean-old-emacs $(emacsd)
+	brew install emacs --with-cocoa --with-ctags
+	# TODO: Remove hard-coded emacs version
+	ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
+	@echo MANUAL STEP:
+	@echo "Now you need to update the list of packages in emacs."
+	@echo "Run emacs, then run M-x list-packages."
+	@echo "Close emacs, then open it again. When it loads this time, it will be able to install the packages."
+
+$(emacsd): $(dev) check-user
+	if [ ! -d $@ ]; then cd ~/dev && git clone git@github.com:$(GITHUB_USER)/emacs.d.git; fi
+
+$(dev):
+	if [ ! -d $@ ]; then mkdir $@; fi
+
+dotfiles: $(dev) check-user
+	cd ~/dev && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
 	cd ~/dev/dotfiles && ./install
 
 tmate: tmux
@@ -59,4 +84,4 @@ bootstrap: homebrew java java-libs fonts dotfiles python tmate emacs finish
 
 .SILENT: finish
 finish:
-	echo "Now open a new shell and test"
+	echo "Now open a new shell and test!"
