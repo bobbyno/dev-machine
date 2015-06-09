@@ -39,10 +39,16 @@ dotfiles: $(dev) check-user
 	cd ~/dev && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
 	cd ~/dev/dotfiles && ./install
 
-tmate: tmux
+tmate: tmux tmate-install tmate-wrapper
+
+tmate-install:
 	brew tap nviennot/tmate
 	brew install tmate
 	brew install reattach-to-user-namespace
+
+tmate-wrapper:
+	cd ~/dev && git clone https://github.com/bobbyno/tmate-wrapper.git
+	cd ~/dev/tmate-wrapper && make install
 
 tmux:
 # tmux 1.8 for tmate compatibility
