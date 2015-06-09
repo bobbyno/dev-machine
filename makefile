@@ -14,9 +14,9 @@ $(oldemacs):
 	if [ ! -d $(oldemacs) ]; then mkdir $(oldemacs); fi
 
 clean-old-emacs: $(oldemacs)
-	sudo mv /usr/bin/emacs $(oldemacs)
-	sudo mv /usr/share/emacs $(oldemacs)/share-emacs
-	sudo mv /usr/bin/emacs-undumped $(oldemacs)
+	-sudo mv /usr/bin/emacs $(oldemacs)
+	-sudo mv /usr/share/emacs $(oldemacs)/share-emacs
+	-sudo mv /usr/bin/emacs-undumped $(oldemacs)
 	if [ -d /Applications/Emacs.app ]; then mv /Applications/Emacs.app $(oldemacs); fi
 
 emacs: clean-old-emacs $(emacsd)
@@ -30,6 +30,7 @@ emacs: clean-old-emacs $(emacsd)
 
 $(emacsd): $(dev) check-user
 	if [ ! -d $@ ]; then cd ~/dev && git clone git@github.com:$(GITHUB_USER)/emacs.d.git; fi
+	cd $@ && make install
 
 $(dev):
 	if [ ! -d $@ ]; then mkdir $@; fi
