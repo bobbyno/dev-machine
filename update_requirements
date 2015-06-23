@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+manifest=$1
+req=$2
+
+version() {
+    local lib=$1
+    curl -sL https://pypi.python.org/pypi/$lib/json | \
+        jq '.info.version' | sed 's/^"\(.*\)"$/\1/' | xargs -I% echo "$lib==%"
+}
+
+rm -f $req
+echo "--index-url https://pypi.python.org/simple/" > $req
+echo "# equivalent to python setup.py develop" >> $req
+echo "# -e ." >> $req
+
+for lib in `cat $manifest`; do
+    echo `version $lib` | tee -a $req
+done
+

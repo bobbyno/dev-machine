@@ -73,7 +73,9 @@ homebrew:
 	brew install bash git tree wget unrar docker
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
-clean-python:
+python: python-clean python-install python-pip-install
+
+python-clean:
 	brew uninstall --force python
 	rm -rf /usr/local/lib/python2.7/site-packages
 	rm -rf ~/Library/Python/2.7/lib/python/site-packages/*
@@ -81,11 +83,19 @@ clean-python:
 	rm -f /usr/local/bin/virtualenv*
 	sudo rm -rf /Library/Python/2.7/site-packages/*
 
-python: clean-python
+python-install:
 	brew install python
+
+python-pip-install:
 	pip install --upgrade pip setuptools
 	pip install -r common-requirements.txt
 	pip install -r emacs-requirements.txt
+
+update-requirements:
+	./update_requirements common-manifest common-requirements.txt
+	./update_requirements emacs-manifest emacs-requirements.txt
+
+install-latest-requirements: update-requirements python-pip-install
 
 bootstrap: homebrew java java-libs fonts dotfiles python tmate emacs finish
 

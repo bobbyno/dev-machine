@@ -67,7 +67,7 @@ pip install --upgrade pip setuptools
 ```
 
 Add a requirements.txt that installs the dependencies in setup.py, if applicable,
-along with dev/test dependencies:
+along with dev/test dependencies pegged to a specific version:
 
 ```
 --index-url https://pypi.python.org/simple/
@@ -89,8 +89,6 @@ pytest==2.6.4
 httmock==1.2.3
 ```
 
-Find the most recent version of each package you need in https://pypi.python.org.
-
 Create a .env file for autoenv to enter the virtualenv whenever you cd into
 this project directory:
 
@@ -111,3 +109,12 @@ to do this the first time.
 `pip list` should show you only the dependencies for this project.
 
 Read more about a `virtualenv` workflow in the [Python Guide](http://docs.python-guide.org/en/latest/dev/virtualenvs/#id3).
+
+#### Updating dependencies in requirements.txt
+
+Use the update_requirements script to generate an updated requirements.txt from
+a manifest file that lists dependencies without versions, then install the new requirements:
+
+`make install-latest-requirements`
+
+This allows the requirements files to be updated in discrete intervals.
