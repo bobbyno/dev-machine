@@ -21,8 +21,7 @@ clean-old-emacs: $(oldemacs)
 
 emacs: clean-old-emacs $(emacsd)
 	brew install emacs --with-cocoa --with-ctags
-	# TODO: Remove hard-coded emacs version
-	ln -s /usr/local/Cellar/emacs/24.5/Emacs.app /Applications
+	brew linkapps emacs
 	@echo MANUAL STEP:
 	@echo "Now you need to update the list of packages in emacs."
 	@echo "Run emacs, then run M-x list-packages."
@@ -70,7 +69,7 @@ java-libs:
 homebrew:
 	ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
-	brew install bash git tree wget unrar docker
+	brew install bash git tree wget unrar docker htop-osx
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 python: python-clean python-install python-pip-install
