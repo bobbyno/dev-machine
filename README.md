@@ -12,14 +12,13 @@ need the full Xcode unless you're building Cocoa apps.
 
 ## Installation
 
-The installation script will attempt to download your `emacs.d` and `dotfiles`
-repositories from an account on github, presumably yours.
+### Set GITHUB_USER to find emacs.d and dotfiles
 
-The installation script will attempt to download your `emacs.d`
-and `dotfiles` repositories from an account on github, presumably yours.
-If you don't already have these, you can fork mine: [dotfiles](https://github.com/bobbyno/dotfiles) [emacs.d](https://github.com/bobbyno/emacs.d).
+The installation script will attempt to download two repositories from Github called
+`emacs.d` and `dotfiles`. Set a GITHUB_USER environment variable to the name of the
+account where these repos can be found: `export GITHUB_USER=user_name`
 
-Set a GITHUB_USER environment variable to the name of the account: `export GITHUB_USER=user_name`
+If you don't already have these, you can [fork](https://github.com/bobbyno/dotfiles) [mine](https://github.com/bobbyno/emacs.d).
 
 To install everything: `make bootstrap`
 
