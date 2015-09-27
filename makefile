@@ -1,14 +1,15 @@
-dev = ~/dev
-emacsd = ~/dev/emacs.d
+SHELL := /usr/bin/env bash
+
+emacsd = $(DEV_HOME)/emacs.d
 oldemacs = /tmp/emacs
 
 help:
 	@echo make bootstrap
 
-.SILENT: check-user
-check-user:
-	if [ -z $(GITHUB_USER) ]; then echo "You need to export GITHUB_USER"; fi
-	[ ! -z $(GITHUB_USER) ]
+.SILENT: check-env
+check-env:
+	[ ! -z "$(GITHUB_USER)" ] || { echo "You need to export GITHUB_USER" ; exit 1 ; }
+	[ ! -z "$(DEV_HOME)" ]    || { echo "You need to export DEV_HOME"    ; exit 1 ; }
 
 $(oldemacs):
 	if [ ! -d $(oldemacs) ]; then mkdir $(oldemacs); fi
@@ -27,16 +28,16 @@ emacs: clean-old-emacs $(emacsd)
 	@echo "Run emacs, then run M-x list-packages."
 	@echo "Close emacs, then open it again. When it loads this time, it will be able to install the packages."
 
-$(emacsd): $(dev) check-user
-	if [ ! -d $@ ]; then cd ~/dev && git clone git@github.com:$(GITHUB_USER)/emacs.d.git; fi
+$(emacsd): check-env $(DEV_HOME)
+	if [ ! -d $@ ]; then cd $(DEV_HOME) && git clone git@github.com:$(GITHUB_USER)/emacs.d.git; fi
 	cd $@ && make install
 
-$(dev):
+$(DEV_HOME): check-env
 	if [ ! -d $@ ]; then mkdir $@; fi
 
-dotfiles: $(dev) check-user
-	cd ~/dev && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
-	cd ~/dev/dotfiles && ./install
+dotfiles: check-env $(DEV_HOME)
+	cd $(DEV_HOME) && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
+	cd $(DEV_HOME)/dotfiles && ./install
 
 tmate: tmux tmate-install tmate-wrapper
 
@@ -45,9 +46,9 @@ tmate-install:
 	brew install tmate
 	brew install reattach-to-user-namespace
 
-tmate-wrapper:
-	cd ~/dev && git clone https://github.com/bobbyno/tmate-wrapper.git
-	cd ~/dev/tmate-wrapper && make install
+tmate-wrapper: check-env
+	cd $(DEV_HOME) && git clone https://github.com/bobbyno/tmate-wrapper.git
+	cd $(DEV_HOME)/tmate-wrapper && make install
 
 tmux:
 # tmux 1.8 for tmate compatibility

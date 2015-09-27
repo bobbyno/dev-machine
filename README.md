@@ -1,6 +1,6 @@
 # Dev Machine
 
-A simple automated setup for an OS X dev workstation.
+A simple, highly opinionated automated setup for an OS X developer workstation.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ need the full Xcode unless you're building Cocoa apps.
 
 ## Installation
 
-### Set GITHUB_USER to find emacs.d and dotfiles
+### Set GITHUB_USER for emacs.d and dotfiles
 
 The installation script will attempt to download two repositories from Github called
 `emacs.d` and `dotfiles`. Set a GITHUB_USER environment variable to the name of the
@@ -21,11 +21,19 @@ account where these repos can be found: `export GITHUB_USER=user_name`
 If you don't already have these repos, and want to have something you can customize, 
 you can [fork](https://github.com/bobbyno/dotfiles) [mine](https://github.com/bobbyno/emacs.d).
 
+### Set DEV_HOME for the root directory of where you hack
+
+This script assumes you use a common directory root for your software development.
+If you want to use `~/dev`, for example, then `export DEV_HOME="~/dev"`.
+
+### Running
+
 To install everything: `make bootstrap`
 
-Have a look at the `makefile` to see what's included.
+Have a look at the `makefile` to see what's included. Run individual targets if you
+don't need everything.
 
-## Components
+## What opinions are included?
 
 #### Python
 
@@ -118,3 +126,7 @@ a manifest file that lists dependencies without versions, then install the new r
 `make install-latest-requirements`
 
 This allows the requirements files to be updated in discrete intervals.
+
+### ...and other opinionated choices
+
+Check the `makefile` for more information.
