@@ -18,7 +18,8 @@ The installation script will attempt to download two repositories from Github ca
 `emacs.d` and `dotfiles`. Set a GITHUB_USER environment variable to the name of the
 account where these repos can be found: `export GITHUB_USER=user_name`
 
-If you don't already have these, you can [fork](https://github.com/bobbyno/dotfiles) [mine](https://github.com/bobbyno/emacs.d).
+If you don't already have these repos, and want to have something you can customize, 
+you can [fork](https://github.com/bobbyno/dotfiles) [mine](https://github.com/bobbyno/emacs.d).
 
 To install everything: `make bootstrap`
 
