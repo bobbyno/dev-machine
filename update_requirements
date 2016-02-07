@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-manifest=$1
-req=$2
+config=$1
+manifest=${config}-manifest
+req=${config}-requirements.txt
 
 version() {
     local lib=$1

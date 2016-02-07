@@ -6,11 +6,4 @@ pandas
 pytest
 networkx
 scikit-learn
-pyzmq
-jinja2
-tornado
-mistune
-jsonschema
-pygments
-terminado
-ipython
+jupyter

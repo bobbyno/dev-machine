@@ -63,14 +63,16 @@ java:
 		"http://download.oracle.com/otn-pub/java/jdk/8u40-b25/jdk-8u40-macosx-x64.dmg"
 	hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
 
-java-libs:
+java-formula:
 	brew install maven leiningen
 
 homebrew:
 	ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
-	brew install bash git tree wget unrar docker htop-osx hilite
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
+
+formula:
+	brew install bash git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
@@ -91,12 +93,13 @@ python-pip-install:
 	pip install -r emacs-requirements.txt
 
 update-requirements:
-	./update_requirements common-manifest common-requirements.txt
-	./update_requirements emacs-manifest emacs-requirements.txt
+	./update_requirements common
+	./update_requirements emacs
+	./update_requirements stats
 
 install-latest-requirements: update-requirements python-pip-install
 
-bootstrap: homebrew java java-libs fonts dotfiles python tmate emacs finish
+bootstrap: homebrew formula java java-formula fonts dotfiles python tmate emacs finish
 
 .SILENT: finish
 finish:

@@ -1,4 +1,4 @@
 virtualenv
 virtualenvwrapper
 autoenv
-ipython
+jupyter
