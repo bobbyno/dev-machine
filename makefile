@@ -66,12 +66,14 @@ java:
 java-formula:
 	brew install maven leiningen
 
-homebrew:
+homebrew: homebrew-install homebrew-formula
+
+homebrew-install:
 	ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
-formula:
+homebrew-formula:
 	brew install bash git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
@@ -99,7 +101,7 @@ update-requirements:
 
 install-latest-requirements: update-requirements python-pip-install
 
-bootstrap: homebrew formula java java-formula fonts dotfiles python tmate emacs finish
+bootstrap: homebrew java java-formula fonts dotfiles python tmate emacs finish
 
 .SILENT: finish
 finish:
