@@ -1,7 +1,7 @@
 --index-url https://pypi.python.org/simple/
 # equivalent to python setup.py develop
 # -e .
-virtualenv==14.0.6
+virtualenv==15.0.1
 virtualenvwrapper==4.7.1
 autoenv==1.0.0
 jupyter==1.0.0

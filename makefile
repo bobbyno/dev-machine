@@ -42,7 +42,6 @@ dotfiles: check-env $(DEV_HOME)
 tmate: tmux tmate-install tmate-wrapper
 
 tmate-install:
-	brew tap nviennot/tmate
 	brew install tmate
 	brew install reattach-to-user-namespace
 
@@ -60,8 +59,8 @@ fonts:
 java:
 	wget -P $$TMPDIR --no-check-certificate --no-cookies --header \
 		"Cookie: oraclelicense=accept-securebackup-cookie" \
-		"http://download.oracle.com/otn-pub/java/jdk/8u40-b25/jdk-8u40-macosx-x64.dmg"
-	hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
+		"http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-macosx-x64.dmg"
+	echo hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
 
 java-formula:
 	brew install maven leiningen
@@ -74,7 +73,7 @@ homebrew-install:
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
-	brew install bash git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
+	brew install bash coreutils git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
@@ -93,6 +92,7 @@ python-pip-install:
 	pip install --upgrade pip setuptools
 	pip install -r common-requirements.txt
 	pip install -r emacs-requirements.txt
+	pip install -r stats-requirements.txt
 
 update-requirements:
 	./update_requirements common
