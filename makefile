@@ -102,14 +102,15 @@ python-update-requirements:
 	./update_requirements stats
 
 ruby-version := 2.3.1
-ruby: ruby-install ruby-gem-update ruby-install-default-gems
+ruby: ruby-install
+
+ruby-update: ruby-gem-update ruby-install-default-gems
 
 ruby-install:
 	brew install rbenv ruby-build
 	rbenv install $(ruby-version)
 	rbenv global $(ruby-version)
-# source ~/.bashrc to run 'rbenv init' in this shell
-	. ~/.bashrc
+	@echo "Now source ~/.bashrc to run 'rbenv init' in this shell before continuing with 'make ruby-update'"
 
 ruby-gem-update:
 	gem install rubygems-update
