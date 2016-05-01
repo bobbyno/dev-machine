@@ -110,6 +110,7 @@ ruby-install:
 	brew install rbenv ruby-build
 	rbenv install $(ruby-version)
 	rbenv global $(ruby-version)
+	echo "gem: --no-document" > ~/.gemrc
 	@echo "Now source ~/.bashrc to run 'rbenv init' in this shell before continuing with 'make ruby-update'"
 
 ruby-gem-update:
