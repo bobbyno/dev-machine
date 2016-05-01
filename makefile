@@ -94,12 +94,30 @@ python-pip-install:
 	pip install -r emacs-requirements.txt
 	pip install -r stats-requirements.txt
 
-update-requirements:
+python-pip-install-latest: python-update-requirements python-pip-install
+
+python-update-requirements:
 	./update_requirements common
 	./update_requirements emacs
 	./update_requirements stats
 
-install-latest-requirements: update-requirements python-pip-install
+ruby-version := 2.3.1
+ruby: ruby-install ruby-gem-update ruby-install-default-gems
+
+ruby-install:
+	brew install rbenv ruby-build
+	rbenv install $(ruby-version)
+	rbenv global $(ruby-version)
+# source ~/.bashrc to run 'rbenv init' in this shell
+	. ~/.bashrc
+
+ruby-gem-update:
+	gem install rubygems-update
+	update_rubygems
+	gem update --system
+
+ruby-install-default-gems:
+	gem install bundler
 
 bootstrap: homebrew java java-formula fonts dotfiles python tmate emacs finish
 
