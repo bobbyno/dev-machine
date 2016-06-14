@@ -73,7 +73,7 @@ homebrew-install:
 	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
-	brew install bash coreutils git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
+	brew install bash coreutils gawk git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
