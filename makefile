@@ -60,7 +60,8 @@ java:
 	wget -P $$TMPDIR --no-check-certificate --no-cookies --header \
 		"Cookie: oraclelicense=accept-securebackup-cookie" \
 		"http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-macosx-x64.dmg"
-	echo hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
+	hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
+	open "/Volumes/JDK 8 Update 91/JDK 8 Update 91.pkg"
 
 java-formula:
 	brew install maven leiningen
@@ -70,7 +71,8 @@ homebrew: homebrew-install homebrew-formula
 homebrew-install:
 	ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
-	cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
+	# TODO: Find out what brew did with completion
+	# cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
 	brew install bash coreutils gawk git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
@@ -121,7 +123,7 @@ ruby-gem-update:
 ruby-install-default-gems:
 	gem install bundler
 
-bootstrap: homebrew java java-formula fonts dotfiles python tmate emacs finish
+bootstrap: homebrew java java-formula fonts dotfiles python ruby tmate emacs finish
 
 .SILENT: finish
 finish:

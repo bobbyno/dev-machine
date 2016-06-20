@@ -4,6 +4,9 @@ A simple, highly opinionated automated setup for an OS X developer workstation.
 
 ## Prerequisites
 
+Install iTerm:
+TODO: Explain syncing the preferences.
+
 Install the Xcode command line developer tools:
 `xcode-select --install`
 
