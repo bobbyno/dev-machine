@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 config=$1
-manifest=${config}-manifest
 req=${config}-requirements.txt
 
 version() {
     local lib=$1
     curl -sL https://pypi.python.org/pypi/$lib/json | \
-        jq '.info.version' | sed 's/^"\(.*\)"$/\1/' | xargs -I% echo "$lib==%"
+        jq '.info.version' | \
+        sed 's/^"\(.*\)"$/\1/' | \
+        xargs -I% echo "$lib==%"
 }
 
 rm -f $req
@@ -15,7 +16,7 @@ echo "--index-url https://pypi.python.org/simple/" > $req
 echo "# equivalent to python setup.py develop" >> $req
 echo "# -e ." >> $req
 
-for lib in `cat $manifest`; do
+for lib in `cat ${config}-manifest`; do
     echo `version $lib` | tee -a $req
 done
 
