@@ -4,6 +4,7 @@ matplotlib
 statsmodels
 pandas
 pytest
+py2cytoscape
 networkx
 scikit-learn
 jupyter
