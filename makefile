@@ -75,23 +75,26 @@ homebrew-install:
 	# cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
-	brew install bash coreutils gawk git hilite htop-osx jq parallel pstree rlwrap tree unrar wget
+	brew install aspell bash clock coreutils curl gawk git hilite htop-osx igraph jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
 python-clean:
-	brew uninstall --force python
-	rm -rf /usr/local/lib/python2.7/site-packages
-	rm -rf ~/Library/Python/2.7/lib/python/site-packages/*
+	brew uninstall --force python python3
+	rm -rf /usr/local/lib/python*
+	rm -rf ~/Library/Python/*
 	rm -f /usr/local/bin/activate.sh
 	rm -f /usr/local/bin/virtualenv*
-	sudo rm -rf /Library/Python/2.7/site-packages/*
+	sudo rm -rf /Library/Python/*
 
 python-install:
-	brew install python
+	brew install python3
+	cd /usr/local/bin && \
+	ln -sf pip3 pip && \
+	ln -sf python3 python
 
 python-pip-install:
-	pip install --upgrade pip setuptools
+	pip install --upgrade pip setuptools wheel
 	pip install -r common-requirements.txt
 	pip install -r emacs-requirements.txt
 	pip install -r stats-requirements.txt
