@@ -21,7 +21,8 @@ clean-old-emacs: $(oldemacs)
 	if [ -d /Applications/Emacs.app ]; then mv /Applications/Emacs.app $(oldemacs); fi
 
 emacs: clean-old-emacs $(emacsd)
-	brew install emacs --with-cocoa --with-ctags
+	brew install pkg-config gnutls
+	brew install emacs --with-cocoa --with-ctags --with-gnutls
 	brew linkapps emacs
 	@echo MANUAL STEP:
 	@echo "Now you need to update the list of packages in emacs."

@@ -2,4 +2,4 @@
 # equivalent to python setup.py develop
 # -e .
 flake8==3.3.0
-jedi==0.10.0
+jedi==0.10.2
