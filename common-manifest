@@ -1,4 +1,5 @@
+autoenv
 virtualenv
 virtualenvwrapper
-autoenv
-jupyter
+twine
+wheel
