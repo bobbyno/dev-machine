@@ -57,12 +57,12 @@ fonts:
 	cd /tmp && wget -O - http://downloads.sourceforge.net/project/dejavu/dejavu/2.34/dejavu-fonts-ttf-2.34.tar.bz2 | tar -xjf -
 	mv /tmp/dejavu-fonts-ttf-2.34/ttf/* ~/Library/Fonts/
 
-java:
+java-9:
 	wget -P $$TMPDIR --no-check-certificate --no-cookies --header \
 		"Cookie: oraclelicense=accept-securebackup-cookie" \
-		"http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-macosx-x64.dmg"
-	hdiutil mount $$TMPDIR/jdk-8u40-macosx-x64.dmg
-	open "/Volumes/JDK 8 Update 91/JDK 8 Update 91.pkg"
+		"http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_osx-x64_bin.dmg"
+	hdiutil mount $$TMPDIR/jdk-9.0.1_osx-x64_bin.dmg
+	open "/Volumes/JDK 9.0.1/JDK 9.0.1.pkg"
 
 java-formula:
 	brew install maven leiningen
@@ -76,7 +76,7 @@ homebrew-install:
 	# cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
-	brew install aspell bash clock coreutils curl gawk git hilite htop-osx igraph jq parallel pstree rlwrap tree unrar wget
+	brew install aspell bash cloc coreutils curl gawk git hilite htop-osx igraph jq parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
@@ -107,7 +107,7 @@ python-update-requirements:
 	./update_requirements emacs
 	./update_requirements stats
 
-ruby-version := 2.3.1
+ruby-version := 2.4.2
 ruby: ruby-install
 
 ruby-update: ruby-gem-update ruby-install-default-gems
@@ -127,7 +127,14 @@ ruby-gem-update:
 ruby-install-default-gems:
 	gem install bundler
 
-bootstrap: homebrew java java-formula fonts dotfiles python ruby tmate emacs finish
+intellij-idea:
+
+	brew cask install intellij-idea
+vim:
+	brew install vim
+
+bootstrap: homebrew java-9 java-formula fonts dotfiles python ruby tmate emacs intellij-idea vim finish
+
 
 .SILENT: finish
 finish:
