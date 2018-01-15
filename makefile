@@ -72,6 +72,7 @@ homebrew: homebrew-install homebrew-formula
 homebrew-install:
 	ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
+	sudo chown -R $(whoami) $(brew --prefix)/*
 	# TODO: Find out what brew did with completion
 	# cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
