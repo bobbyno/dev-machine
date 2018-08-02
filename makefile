@@ -100,6 +100,7 @@ python-pip-install:
 	pip install -r common-requirements.txt
 	pip install -r emacs-requirements.txt
 	pip install -r stats-requirements.txt
+	pip install -r devops-requirements.txt
 
 python-pip-install-latest: python-update-requirements python-pip-install
 
@@ -107,6 +108,7 @@ python-update-requirements:
 	./update_requirements common
 	./update_requirements emacs
 	./update_requirements stats
+	./update_requirements devops
 
 ruby-version := 2.4.2
 ruby: ruby-install
