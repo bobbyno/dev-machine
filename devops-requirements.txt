@@ -2,3 +2,5 @@
 # equivalent to python setup.py develop
 # -e .
 ansible==2.6.2
+jmespath==0.9.3
+passlib==1.7.1
