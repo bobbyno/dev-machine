@@ -1,4 +1,6 @@
 autoenv
+cookiecutter
+ipython
 pypandoc
 virtualenv
 virtualenvwrapper

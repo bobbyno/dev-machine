@@ -77,7 +77,7 @@ homebrew-install:
 	# cp /usr/local/Library/Contributions/brew_bash_completion.sh /usr/local/etc/bash_completion.d/
 
 homebrew-formula:
-	brew install aspell bash cloc coreutils curl gawk git hilite htop-osx igraph jq parallel pstree rlwrap tree unrar wget
+	brew install aspell bash cloc coreutils curl gawk git hilite htop-osx igraph jq pandoc parallel pstree rlwrap tree unrar wget
 
 python: python-clean python-install python-pip-install
 
@@ -99,8 +99,8 @@ python-pip-install:
 	pip install --upgrade pip setuptools wheel
 	pip install -r common-requirements.txt
 	pip install -r emacs-requirements.txt
-	pip install -r stats-requirements.txt
-	pip install -r devops-requirements.txt
+#	pip install -r stats-requirements.txt
+#	pip install -r devops-requirements.txt
 
 python-pip-install-latest: python-update-requirements python-pip-install
 
@@ -131,14 +131,21 @@ ruby-install-default-gems:
 	gem install bundler
 
 intellij-idea:
-
 	brew cask install intellij-idea
-vim:
-	brew install vim
 
-bootstrap: homebrew java-9 java-formula fonts dotfiles python ruby tmate emacs intellij-idea vim finish
-
+bootstrap: homebrew java-9 java-formula fonts dotfiles python ruby tmate emacs intellij-idea finish
 
 .SILENT: finish
 finish:
 	echo "Now open a new shell and test!"
+
+
+# docker
+
+dm-create-%:
+	docker-machine create \
+	--driver xhyve \
+	--xhyve-cpu-count=2 \
+	--xhyve-memory-size=4096 \
+	--xhyve-disk-size "15000" \
+	$*

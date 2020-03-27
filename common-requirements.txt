@@ -2,8 +2,10 @@
 # equivalent to python setup.py develop
 # -e .
 autoenv==1.0.0
+cookiecutter==1.6.0
+ipython==7.1.1
 pypandoc==1.4
-virtualenv==16.0.0
+virtualenv==16.1.0
 virtualenvwrapper==4.8.2
-twine==1.11.0
-wheel==0.31.1
+twine==1.12.1
+wheel==0.32.3
