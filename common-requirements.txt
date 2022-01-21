@@ -3,7 +3,7 @@
 # -e .
 autoenv==1.0.0
 cookiecutter==1.6.0
-ipython==7.1.1
+ipython==7.16.3
 pypandoc==1.4
 virtualenv==16.1.0
 virtualenvwrapper==4.8.2
