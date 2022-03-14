@@ -1,6 +1,34 @@
+<!-- TODO: ADD make list -->
+1. install iterm
+2. create a common directory root for your software development
+2. export env vars
+3. if you use bashrc, .... 
+4. Update your command tool: softwareupdate --all --install --force
+4. make homebrew
+
+
+
 # Dev Machine
 
 A simple, highly opinionated automated setup for an OS X developer workstation.
+
+## TLTR
+Export following env. variables:
+- `export GITHUB_USER=user_name`
+- Common directory root for your software development, i.e. for **~/dev** use `export DEV_HOME="~/dev"`
+- Add the following to your **.bashrc**
+  + ```
+    # python env: virtualenv, virtualenvwrapper, and autoenv
+    export WORKON_HOME=$DEV_HOME/.virtualenvs
+    export PROJECT_HOME=$DEV_HOME
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+    export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+    source /usr/local/bin/virtualenvwrapper.sh
+    source /usr/local/bin/activate.sh
+    # end python env
+    ```
+- source `~/.bashrc`
+- To install everything: `make bootstrap`
 
 ## Prerequisites
 
@@ -74,7 +102,7 @@ Here's an example of how to use virtual environments to create a stats workspace
 
 ```
 mkvirtualenv stats
-pip install --upgrade pip setuptools
+pip3 install --upgrade pip3 setuptools
 ```
 
 Add a requirements.txt that installs the dependencies in setup.py, if applicable,
@@ -86,18 +114,17 @@ along with dev/test dependencies pegged to a specific version:
 # equivalent to python setup.py develop
 -e .
 
-numpy==1.9.2
-scipy==0.15.1
-matplotlib==1.4.3
-statsmodels==0.6.1
-pandas==0.15.2
-ipython[notebook]==3.0.0
-pytest==2.6.4
-networkx==1.9.1
-scikit-learn==0.15.2
-moto==0.4.1
-pytest==2.6.4
-httmock==1.2.3
+numpy~=1.22.1
+scipy~=1.7.3
+matplotlib==3.5.1
+statsmodels==0.13.1
+pandas==1.4.0
+notebook==6.4.7
+pytest==6.2.5
+networkx==2.6.3
+scikit-learn==1.0.2
+moto==3.0.0
+httmock==1.4.0
 ```
 
 Create a .env file for autoenv to enter the virtualenv whenever you cd into

@@ -1,9 +1,9 @@
 --index-url https://pypi.python.org/simple/
 # equivalent to python setup.py develop
 # -e .
-autoenv==1.0.0
-pypandoc==1.4
-virtualenv==16.0.0
-virtualenvwrapper==4.8.2
-twine==1.11.0
-wheel==0.31.1
+autoenv~=1.0.0
+pypandoc~=1.7.2
+virtualenv~=20.13.0
+virtualenvwrapper==4.8.4
+twine==3.7.1
+wheel==0.37.1
