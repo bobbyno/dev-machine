@@ -8,7 +8,7 @@ oldemacs = /tmp/emacs
 help:
 	@echo make bootstrap
 
-bootstrap: homebrew java-9 java-formula fonts dotfiles python python-pip-install-latest ruby tmate emacs intellij-idea vim finish docker-desktop sublime slack zoom 1Password atom chrome postgresql postman
+bootstrap: homebrew java-9 java-formula fonts dotfiles python python-pip-install-latest ruby tmate emacs intellij-idea vim docker-desktop sublime atom chrome postgresql postman finish
 
 check-env:
 	[ ! -z "$(GITHUB_USER)" ] || { echo "You need to export GITHUB_USER" ; exit 1 ; }
@@ -24,7 +24,7 @@ $(emacsd): check-env $(DEV_HOME)
 $(DEV_HOME): check-env
 	if [ ! -d $@ ]; then mkdir $@; fi
 
-homebrew: homebrew-install homebrew-formula
+homebrew: homebrew-install homebrew-formula homebrew-remote-productivity
 
 homebrew-install:
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -38,17 +38,19 @@ homebrew-install:
 
 
 homebrew-formula:
-	brew install aspell bash cloc coreutils curl gawk git hilite htop-osx igraph jq parallel pstree rlwrap tree unrar wget
+	brew install aspell bash cloc coreutils curl gawk git hilite htop-osx igraph jq pstree rlwrap tree wget gzip
 
-java-9:
+homebrew-remote-productivity:
+	brew zoom miro slack 1password
+
+java-17-x64:
 	wget -P $$TMPDIR --no-check-certificate --no-cookies --header \
 		"Cookie: oraclelicense=accept-securebackup-cookie" \
-		"http://download.oracle.com/otn-pub/java/jdk/9.0.1+11/jdk-9.0.1_osx-x64_bin.dmg"
-	hdiutil mount $$TMPDIR/jdk-9.0.1_osx-x64_bin.dmg
-	open "/Volumes/JDK 9.0.1/JDK 9.0.1.pkg"
+		"https://download.oracle.com/java/17/latest/jdk-17_macos-x64_bin.tar.gz"
+	tar xvzf $$TMPDIR/jdk-17_macos-x64_bin.tar.gz
 
 java-formula:
-	brew install maven leiningen
+	brew install maven
 
 fonts:
 	cd /tmp && wget -O - http://downloads.sourceforge.net/project/dejavu/dejavu/2.34/dejavu-fonts-ttf-2.34.tar.bz2 | tar -xjf -
@@ -91,7 +93,7 @@ python-update-requirements:
 
 
 ruby-version := 3.1.0
-ruby: ruby-install
+ruby: ruby-install ruby-update ruby-gem-update ruby-install-default-gems
 
 ruby-install:
 	brew install rbenv ruby-build
@@ -139,21 +141,17 @@ clean-old-emacs: $(oldemacs)
 	if [ -d /Applications/Emacs.app ]; then mv /Applications/Emacs.app $(oldemacs); fi
 
 intellij-idea:
-	brew cask install intellij-idea
+	brew install --cask intellij-idea
 
 vim:
 	brew install vim
 
-.SILENT: finish
-finish:
-	echo "Now open a new shell and test!"
-
 docker-desktop:
-	brew cask install docker
+	brew install --cask  docker
 	docker --version
 
 sublime:
-	brew install --cask sublime-text
+	brew install --cask sublime-merge
 
 slack:
 	brew install --cask slack
@@ -175,3 +173,7 @@ postgresql:
 
 postman:
 	brew install --cask postman
+
+.SILENT: finish
+finish:
+	echo "Now open a new shell and test!"

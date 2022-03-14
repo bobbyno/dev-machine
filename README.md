@@ -1,4 +1,10 @@
 <!-- TODO: ADD make list -->
+<!-- TODO: Git config -->
+<!-- TODO: bashrc -->
+<!-- TODO: slack -->
+<!-- TODO: zoom -->
+<!-- TODO: miro -->
+<!-- TODO: fix dotfiles -->
 1. install iterm
 2. create a common directory root for your software development
 2. export env vars
