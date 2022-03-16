@@ -18,10 +18,10 @@ help:
 	@echo make bootstrap
 
 generate-ssh-key:
-	# 	$: make generate-ssh-key KEY_NAME=MY_NEW_COMPUTER
-  test ! -f ~/.ssh/$(KEY_NAME).pub && ssh-keygen -t rsa -C '$(KEY_NAME)' -P '' -f ~/.ssh/$(KEY_NAME) && chmod 400 ~/.ssh/$(KEY_NAME).pub
-  eval $(ssh-agent -s)
-  ssh-add ~/.ssh/$(KEY_NAME)
+	# $: make generate-ssh-key KEY_NAME=MY_NEW_COMPUTER
+	test ! -f ~/.ssh/$(KEY_NAME).pub && ssh-keygen -t rsa -C '$(KEY_NAME)' -P '' -f ~/.ssh/$(KEY_NAME) && chmod 400 ~/.ssh/$(KEY_NAME).pub
+	eval $(ssh-agent -s)
+	ssh-add ~/.ssh/$(KEY_NAME)
 
 bootstrap: homebrew java-9 java-formula fonts dotfiles python python-pip-install-latest ruby tmate emacs intellij-idea vim docker-desktop sublime atom chrome postgresql postman finish
 
