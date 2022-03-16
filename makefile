@@ -75,7 +75,7 @@ dotfiles: check-env $(DEV_HOME)
 	cd $(DEV_HOME) && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
 	cd $(DEV_HOME)/dotfiles && ./install
 
-python: python-clean python-install python-pip-install
+python: python-install python-pip-install
 
 python-clean:
 	brew uninstall --ignore-dependencies python python3
