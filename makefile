@@ -1,9 +1,18 @@
 SHELL := /usr/bin/env bash
-
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
 emacsd = $(DEV_HOME)/emacs.d
 oldemacs = /tmp/emacs
 
 .SILENT: check-env
+
+list:
+	###########################################################################################################
+	# You may choose to put the following in your bashrc or equivalent for tab-completion:										#
+	# 	complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' ?akefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" make 		#
+	###########################################################################################################
+	@grep '^[^#[:space:]].*:' Makefile
 
 help:
 	@echo make bootstrap
