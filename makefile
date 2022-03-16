@@ -102,24 +102,23 @@ python-update-requirements:
 
 
 ruby-version := 3.1.0
-ruby: ruby-install ruby-update ruby-gem-update ruby-install-default-gems
+ruby: ruby-install ruby-update
 
 ruby-install:
 	brew install rbenv ruby-build
 	rbenv install $(ruby-version)
 	rbenv global $(ruby-version)
+	ruby -v
 	echo "gem: --no-document" > ~/.gemrc
 	@echo "Now source ~/.bashrc to run 'rbenv init' in this shell before continuing with 'make ruby-update'"
 
-ruby-update: ruby-gem-update ruby-install-default-gems
-
-ruby-gem-update:
-	gem install rubygems-update
-	update_rubygems
-	gem update --system
+ruby-update: ruby-install-default-gems ruby-gem-update
 
 ruby-install-default-gems:
 	gem install bundler
+
+ruby-gem-update:
+	gem update --system
 
 tmate: tmux tmate-install tmate-wrapper
 
