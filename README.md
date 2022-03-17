@@ -57,7 +57,7 @@ don't need everything.
 ## What opinions are included?
 
 #### Python
-To ensure repeatablity, `$: make python` starts with a clean slate by removing any
+Before you run `$ make python`, you may run ` $: make python-clean` to starts with a clean slate by removing any
 Python libraries previously installed by OS X or homebrew.
 
 When the script completes, add the following to your .bashrc if you don't already have it:

@@ -75,7 +75,7 @@ dotfiles: check-env $(DEV_HOME)
 	cd $(DEV_HOME) && git clone git@github.com:$(GITHUB_USER)/dotfiles.git
 	cd $(DEV_HOME)/dotfiles && ./install
 
-python: python-install python-pip-install
+python: pyenv python-install python-pip-install
 
 python-clean:
 	brew uninstall --ignore-dependencies python python3
@@ -85,20 +85,24 @@ python-clean:
 	rm -f /usr/local/bin/virtualenv*
 	sudo rm -rf /Library/Python/*
 
-python-install:
-	brew install python3
-	cd /usr/local/bin && \
-	ln -sf pip3 pip && \
-	ln -sf python3 python
+pyenv:
+	brew install pyenv
 
-python-pip-install:
-	pip install --upgrade pip setuptools wheel
-	pip install -r common-requirements.txt
-	pip install -r emacs-requirements.txt
-	pip install -r stats-requirements.txt
-	pip install -r devops-requirements.txt
+python-version := 3.10.0
+python-install:
+	pyenv install $(python-version)
+	pyenv global $(python-version)
+	pyenv rehash
+	echo 'alias python="python3"' >> ~/.bashrc
 
 python-pip-install-latest: python-update-requirements python-pip-install
+
+python-pip-install:
+	pip3 install --upgrade pip setuptools wheel
+	pip3 install -r common-requirements.txt
+	pip3 install -r emacs-requirements.txt
+	pip3 install -r stats-requirements.txt
+	pip3 install -r devops-requirements.txt
 
 python-update-requirements:
 	./update_requirements common

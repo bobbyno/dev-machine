@@ -1,6 +1,6 @@
 --index-url https://pypi.python.org/simple/
 # equivalent to python setup.py develop
 # -e .
-ansible==5.2.0
-jmespath==0.10.0
+ansible==5.5.0
+jmespath==1.0.0
 passlib==1.7.4
