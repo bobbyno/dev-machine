@@ -170,6 +170,7 @@ docker-desktop:
 
 sublime:
 	brew install --cask sublime-text
+	sudo ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
 slack:
 	brew install --cask slack
