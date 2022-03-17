@@ -43,7 +43,7 @@ homebrew: homebrew-install homebrew-formula homebrew-remote-productivity
 
 homebrew-install:
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	echo 'eval "$(opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
+	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 	# ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew doctor
