@@ -165,7 +165,7 @@ docker-desktop:
 	docker --version
 
 sublime:
-	brew install --cask sublime-merge
+	brew install --cask sublime-text
 
 slack:
 	brew install --cask slack
